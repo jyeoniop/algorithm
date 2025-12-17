@@ -11,36 +11,34 @@ public class Main{
         
         int N = Integer.parseInt(br.readLine());
         int M = Integer.parseInt(br.readLine());
-        
-        String pn = "I";
-        for(int i=1;i<=N;i++){
-            pn = pn+"OI";
-        }
-        int pnsize = N*2+1;
-
+        Character[] originArray = new Character[M];
         String str = br.readLine();
-        String[] originArray = str.split("");
+        for(int i =0;i<M;i++){
+            originArray[i] = str.charAt(i);
+        }
 
+        int matchcount = 0;
+        int result = 0;
+        for(int i =1;i<M-1;i++){
+            if(originArray[i-1]=='I'&&originArray[i]=='O'&&originArray[i+1]=='I'){
+                matchcount++;
 
-        String[] copyArray = new String[pnsize];
-        int count = 0;
-        
-        for(int i=0;i<M;i++){
-            int start = i;
-            int end = i+pnsize;
-
-            if(M<end){break;}
-
-            System.arraycopy(originArray, start, copyArray, 0, pnsize);
-            if(pn.equals(String.join("", copyArray))){
-                count++;
+                if(matchcount==N){
+                    result++;
+                    matchcount--;
+                }
+                i++;
+            }
+            else{
+                matchcount = 0;
             }
         }
 
 
 
 
-        System.out.println(count);
+
+        System.out.println(result);
         
         
     }
