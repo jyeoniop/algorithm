@@ -1,41 +1,28 @@
-import java.util.*;
 import java.io.*;
-// import java.time.LocalDate;
-import java.lang.reflect.Array;
-
-
+import java.lang.*;
+import java.util.*;
 public class Main{
-
     public static void main(String args[]) throws Exception{
-
         
-
-        // BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        // BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         StringBuilder sb = new StringBuilder();
-        StringTokenizer st ;
+        StringTokenizer st;
+
+        int N  = Integer.parseInt(br.readLine());
         
-        int N = Integer.parseInt(br.readLine());
-        Queue<Integer> cards = new ArrayDeque<>();
-        for(int i =1;i<=N;i++){
-            cards.offer(i);
+        Queue<Integer> q = new LinkedList<>();
+        
+        for(int i=1;i<=N;i++){
+            q.add(i);
+        }
+        while(q.size()!=1){
+            q.poll();
+            q.add(q.poll());
         }
 
-        while(cards.size()>1){
-            cards.poll();
-            int moved= cards.poll();
-            cards.offer(moved);
-        }
-        if(!cards.isEmpty()){
-            System.out.println(cards.poll());
-
-        }
-
-        }
-
-       
+        
+        System.out.println(q.poll());
+    
     }
-
-
-
-
+}
