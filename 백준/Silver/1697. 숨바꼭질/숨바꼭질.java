@@ -1,65 +1,62 @@
 import java.io.*;
+import java.lang.*;
 import java.util.*;
-
 public class Main{
-    static int[] time;
-    static boolean[] visited;
-    static int K;
-    static int N;
-    public static  void bfs(int c){
-        Queue<Integer> q = new LinkedList();
+       static int[] time;
+       static  int K;
+       static boolean[] visited;
+
+       public static void bfs(int c) {
+
+        Queue<Integer> q= new LinkedList<>();
         q.add(c);
-        
+
         while(!q.isEmpty()){
-            int cur = q.poll();
-            visited[cur] = true;
+            int i= q.poll();
 
-            if(cur==K){
-                return;
-            }
-            int[] nextposition = {cur+1, cur-1, cur*2};
+            if(i==K)return;
 
-            for (int next : nextposition) {
-                if(next>=0&&next<=100000){
-                    if(!visited[next]){
-                        q.add(next);
-                        visited[next] = true;
-                        time[next] = time[cur]+1;
+            int[] next = {i-1, i+1, i*2};
+                for (int net : next) {
+                if(net>=0&&net<=100000){
+                    if(!visited[net]){
+                        visited[net] = true;
+                        time[net] = time[i]+1;
+                        q.add(net);
                     }
-                    
                 }
             }
             
-            
-            
         }
-    }
-    
+       }
     
     public static void main(String args[]) throws Exception{
+        
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        // StringBuilder sb = new StringBuilder();
+        // BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         StringBuilder sb = new StringBuilder();
-        StringTokenizer st = new StringTokenizer(br.readLine()," ");
+        StringTokenizer st;
         
-        N = Integer.parseInt(st.nextToken());
+        st= new StringTokenizer(br.readLine()," ");
+        int N = Integer.parseInt(st.nextToken());
         K = Integer.parseInt(st.nextToken());
+
         time = new int[100001];
-        
-        
-        visited = new boolean[100001];
         time[N] = 0;
-
-        if(N>=K){
-            System.out.println(N-K);
-        }
-        else{
-            bfs(N);
-            
-            System.out.println(time[K]);
-        }
+        visited = new boolean[100001];
+        visited[N] = true;
         
-    }
+        if(N>=K){
+            sb.append(N-K);
+        }else{
+            bfs(N);
+            sb.append(time[K]);
+        }
 
+
+
+        System.out.println(sb.toString());
     
     }
+
+}
