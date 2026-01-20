@@ -1,31 +1,39 @@
 import java.util.*;
 class Solution {
-    static int count = 0;
-    static int[] nums;
     static int tar;
-    public void dfs(int sum, int depth){
-        
-        if(depth==nums.length){
+    static int[] nums;
+    static int N;
+    static int[]result;
+    static int count;
+    public static void dfs(int start, int depth){
+        if(depth==N){
+            int sum = 0;
+            for(int i :result){
+                sum+=i;
+            }
             if(sum==tar){
                 count++;
-            }return;
+            }
+            return;
         }
+        result[depth] = nums[start];
+        dfs(start+1, depth+1);
         
-        sum += nums[depth];
-        dfs(sum, depth+1);
-        
-        sum -= (nums[depth]*2);
-        dfs(sum, depth+1);
-        
+        result[depth] = (nums[start])*-1;
+        dfs(start+1, depth+1);
     }
     public int solution(int[] numbers, int target) {
-        int answer = 0;
-        nums = numbers;
+        int answer;
+        
         tar = target;
+        nums = numbers;
+        N = nums.length;
+        result = new int[N];
+        count = 0;
         
         dfs(0,0);
         
-        answer = count;
+        answer= count;
         
         return answer;
     }
