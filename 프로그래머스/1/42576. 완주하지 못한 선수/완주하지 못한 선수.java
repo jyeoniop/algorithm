@@ -1,19 +1,20 @@
 import java.util.*;
 class Solution {
     public String solution(String[] participant, String[] completion) {
-        
         String answer = "";
         
-        HashMap<String, Integer> name = new HashMap<>();
-        for(String p : participant){
-            name.put(p, name.getOrDefault(p,0)+1);
+         HashMap<String, Integer> par = new HashMap<>();
+        for(String str : participant){
+            par.put(str, par.getOrDefault(str, 0)+1);
         }
-        for(String c : completion){
-            name.put(c, name.get(c)-1);
+
+        for(String str:completion){
+            par.put(str, par.get(str)-1);
         }
-        for(String k : name.keySet()){
-            if(name.get(k)!=0){
-                answer = k;
+
+        for(String k : par.keySet()){
+            if(par.get(k)!=0){
+                answer= k;
             }
         }
         
