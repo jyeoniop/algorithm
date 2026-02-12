@@ -1,8 +1,11 @@
-with per as(select *, PERCENT_RANK() OVER (ORDER BY SIZE_OF_COLONY desc )*100 AS percen
+with rankt as (select *, percent_rank() over (order by SIZE_OF_COLONY desc) as sizerank
 from ECOLI_DATA)
-select id as ID, (case when percen<=25 then 'CRITICAL' 
-           when percen<=50 then 'HIGH' 
-           when percen<=75 then 'MEDIUM' 
-           else 'LOW' end) as COLONY_NAME
-from per
-order by id asc
+select r.id, 
+case when r.sizerank<=0.25 then 'CRITICAL'
+    when r.sizerank<=0.5 then 'HIGH'
+    when r.sizerank<=0.75 then 'MEDIUM'
+    else 'LOW' 
+    end as COLONY_NAME
+from rankt as r join ECOLI_DATA as e on r.id=e.id
+order by r.id asc;
+
