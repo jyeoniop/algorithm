@@ -1,56 +1,51 @@
 class Solution {
     public String solution(int[] numbers, String hand) {
-        StringBuilder sb = new StringBuilder();
-        // 초기 위치: *은 10번, #은 12번 위치
-        int leftPos = 10;
-        int rightPos = 12;
-
-        for (int n : numbers) {
-            if (n == 1 || n == 4 || n == 7) {
-                sb.append("L");
-                leftPos = n;
-            } else if (n == 3 || n == 6 || n == 9) {
-                sb.append("R");
-                rightPos = n;
-            } else {
-                // 가운데 버튼 (2, 5, 8, 0)
-                if (n == 0) n = 11;
-
-                int leftDist = getDistance(leftPos, n);
-                int rightDist = getDistance(rightPos, n);
-
-                if (leftDist < rightDist) {
-                    sb.append("L");
-                    leftPos = n;
-                } else if (rightDist < leftDist) {
-                    sb.append("R");
-                    rightPos = n;
-                } else {
-                    // 거리가 같을 때
-                    if (hand.equals("right")) {
-                        sb.append("R");
-                        rightPos = n;
-                    } else {
-                        sb.append("L");
-                        leftPos = n;
+        String answer = "";
+        
+        int right = 11;
+        int left = 9;
+        
+        for(int num :numbers){
+            int n = num-1;
+            if(num==0)n=10;
+            if(num==1||num==4||num==7){
+                answer += "L";
+                left = n;
+            }else if(num==3||num==6||num==9){
+                answer += "R";
+                right = n;
+            }else{
+                int n_row = n/3;
+                int n_col = n%3;
+                
+                int left_row = Math.abs((left/3)-n_row);
+                int left_col = Math.abs((left%3)-n_col);
+                
+                int right_row = Math.abs((right/3)-n_row);
+                int right_col = Math.abs((right%3)-n_col);
+                
+                int left_distance = left_row+left_col;
+                int right_distance = right_row+right_col;
+                if(hand.equals("right")){
+                    if(left_distance>=right_distance){
+                        answer += "R";
+                        right = n;
+                    }else{
+                        answer += "L";
+                        left = n;
                     }
-                }
+                }else{
+                    if(left_distance<=right_distance){
+                        answer += "L";
+                        left = n;
+                    }else{
+                        answer += "R";
+                        right = n;
+                    }
+                }                   
             }
         }
-        return sb.toString();
-    }
-
-    // 좌표 간 거리를 계산하는 별도 메서드
-    public int getDistance(int pos, int target) {
-        // 숫자를 0~11 인덱스 체계로 변환 (1->0, 2->1, ..., 0(11)->10, #(12)->11)
-        int p = pos - 1;
-        int t = target - 1;
-
-        int pRow = p / 3;
-        int pCol = p % 3;
-        int tRow = t / 3;
-        int tCol = t % 3;
-
-        return Math.abs(pRow - tRow) + Math.abs(pCol - tCol);
+        
+        return answer;
     }
 }
