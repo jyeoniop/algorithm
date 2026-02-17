@@ -1,61 +1,80 @@
 import java.util.*;
-
 class Solution {
     public int[] solution(String[] park, String[] routes) {
-        int r = park.length;
-        int c = park[0].length();
         
+        int c = park[0].length();
+        int r = park.length;
+        
+        int[][] parkint = new int[r][c];
         int curr = 0;
         int curc = 0;
-        
-        // 1. 시작 지점(S) 찾기
-        for(int i=0; i<r; i++) {
-            for(int j=0; j<c; j++) {
-                if(park[i].charAt(j) == 'S') {
+        for(int i=0;i<r;i++){
+            for(int j=0;j<c;j++){
+                char ch = park[i].charAt(j);
+                if(ch=='S'){
                     curr = i;
                     curc = j;
-                }
+                    parkint[i][j] = 0;
+                }else if(ch=='O')parkint[i][j] = 0;
+                else parkint[i][j] = 1;
             }
         }
-        
-        // 방향 매핑 (N, S, W, E)
-        int[] dr = {-1, 1, 0, 0}; // 세로(row) 변화
-        int[] dc = {0, 0, -1, 1}; // 가로(col) 변화
-        
-        for(String route : routes) {
-            String[] parts = route.split(" ");
-            String dir = parts[0];
-            int move = Integer.parseInt(parts[1]);
-            
+        for (int[] is : parkint) {
+            for (int is2 : is) {
+                System.out.print(is2);
+            }System.out.println();
+        }
+
+        int[] dx = {1,0,-1,0};
+        int[] dy = {0,1,0,-1};
+        StringTokenizer st;
+        for(String s : routes){
+            st = new StringTokenizer(s, " ");
+            String dir = st.nextToken();
+            int move = Integer.parseInt(st.nextToken());
             int dircnt = 0;
-            if(dir.equals("N")) dircnt = 0;
-            else if(dir.equals("S")) dircnt = 1;
-            else if(dir.equals("W")) dircnt = 2;
-            else if(dir.equals("E")) dircnt = 3;
+            if(dir.equals("N")){
+                dircnt = 3;
+            }else if(dir.equals("S")){
+                dircnt = 1;
+            }else if(dir.equals("W")){
+                dircnt = 2;
+            }else {
+                dircnt = 0;
+            }
+            int tempr = curr;
+            int tempc = curc;
+            boolean chk = true;
             
-            int tempR = curr;
-            int tempC = curc;
-            boolean isPossible = true;
-            
-            // 2. 한 칸씩 이동하며 검사
-            for(int i=0; i<move; i++) {
-                tempR += dr[dircnt];
-                tempC += dc[dircnt];
-                
-                // 공원을 벗어나거나 장애물(X)을 만나면 실패
-                if(tempR < 0 || tempR >= r || tempC < 0 || tempC >= c || park[tempR].charAt(tempC) == 'X') {
-                    isPossible = false;
-                    break;
-                }
+            for(int m = 0;m<move;m++){
+                int nextr = tempr+dy[dircnt];
+                int nextc = tempc+dx[dircnt];
+
+                if(nextr>=0&&nextr<r&&nextc>=0&&nextc<c){
+                    if(parkint[nextr][nextc]==0){
+                        tempr = nextr;
+                        tempc = nextc;    
+                    }else{chk = false;break;}
+                    
+                }else{chk = false;break;}  
+            }if(chk){
+                curr = tempr;
+                curc = tempc;
             }
             
-            // 3. 이동이 가능할 때만 실제로 위치를 업데이트
-            if(isPossible) {
-                curr = tempR;
-                curc = tempC;
-            }
+            
+            
+            
         }
         
-        return new int[]{curr, curc};
+        int[] answer = new int[2];
+        answer[0] = curr;
+        answer[1] = curc;
+
+
+        return answer;
+        
+        
+        
     }
 }
