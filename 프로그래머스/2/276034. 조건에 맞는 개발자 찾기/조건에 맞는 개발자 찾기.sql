@@ -1,6 +1,10 @@
--- 코드를 작성해주세요
+# select distinct d.id, d.email, d.first_name, d.last_name
+# from skillcodes as s join developers as d on (s.code&d.skill_code)>0
+# where s.name='C#' or s.name='Python'
+# order by d.id asc
+
+
 select distinct d.id, d.email, d.first_name, d.last_name
-from SKILLCODES  as s cross join DEVELOPERS  as d
-where d.skill_code&(SELECT CODE FROM SKILLCODES WHERE NAME = 'Python') or 
-d.skill_code&(SELECT CODE FROM SKILLCODES WHERE NAME = 'C#') 
-order by d.id asc
+from developers as d join skillcodes as s on (d.skill_code&s.code)>0
+where s.name = 'C#' or s.name='Python'
+order by d.id asc;
