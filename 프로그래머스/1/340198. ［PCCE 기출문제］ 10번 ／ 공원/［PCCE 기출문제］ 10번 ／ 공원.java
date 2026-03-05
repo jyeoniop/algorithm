@@ -1,43 +1,32 @@
 import java.util.*;
 class Solution {
-    public boolean getchk(String[][] park, int r, int c, int len){
-        boolean chk = true;
-        for(int i=r;i<r+len;i++){
-            for(int j=c;j<c+len;j++){
-                if(!park[i][j].equals("-1")){
-                    chk = false;
-                    break;
-                }if(!chk)break;
-            }
-        }
-        if(chk)return true;
-        else return false;
-    }
     public int solution(int[] mats, String[][] park) {
         int answer = 0;
         
-        mats = Arrays.stream(mats)
-             .boxed()
-             .sorted(Collections.reverseOrder())
-             .mapToInt(Integer::intValue)
-             .toArray();
+        Arrays.sort(mats);
         
-        for(int idx = 0;idx<mats.length;idx++){
-            int mat=mats[idx];
-            int maxr = park.length-mat;
-            int maxc = park[0].length-mat;
+        for(int mat=mats.length-1;mat>=0;mat--){
+            int m = mats[mat];
 
-            for(int i=0;i<=maxr;i++){
-                for(int j=0;j<=maxc;j++){
+            for(int i=0;i<=park.length-m;i++){
+                for(int j=0;j<=park[0].length-m;j++){
                     if(park[i][j].equals("-1")){
-                        if(getchk(park, i, j, mat)){
-                            return mat;
-                        }
+
+                        boolean chk = true;
+                        for(int x=i;x<(i+m);x++){
+                            for(int y=j;y<(j+m);y++){
+                                if(!park[x][y].equals("-1")){
+                                    chk = false;
+                                    break;
+                                }
+                            }if(!chk) break;
+                        }if(chk) return m;
                     }
                 }
             }
         }
-
+        
+        
         return -1;
     }
 }
