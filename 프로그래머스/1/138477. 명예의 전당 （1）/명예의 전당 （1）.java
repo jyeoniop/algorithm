@@ -13,6 +13,7 @@ class Solution {
             }
             result[i] = q.peek();
         }
+        
         answer = result;
         
         return answer;
