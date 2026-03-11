@@ -33,9 +33,6 @@ class Solution {
         answer /= jobs.length;
         
         
-        
-        
-        
         return answer;
     }
 }
