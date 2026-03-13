@@ -9,7 +9,6 @@ class Solution {
                 arr[i][j] = count++;
             }
         }
-        
         for(int q=0;q<queries.length;q++){
             int strow = queries[q][0];
             int stcol = queries[q][1];
