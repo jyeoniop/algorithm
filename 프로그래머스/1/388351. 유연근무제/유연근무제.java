@@ -2,34 +2,28 @@ class Solution {
     public int solution(int[] schedules, int[][] timelogs, int startday) {
         int answer = 0;
         
-        int[][] sch = new int[schedules.length][7];
-        for(int j=0;j<schedules.length;j++){
-            int[] t = timelogs[j];
-            for(int i=0;i<7;i++){
-                int day = (startday+i)>=8?(startday+i)%8:startday+i-1;
-                sch[j][day] = t[i];
+        int daynum = startday;
+        for(int i=0;i<schedules.length;i++){
+            schedules[i] = (schedules[i]/100*60)+(schedules[i]%100)+10;
+        }
+        int time = 0;
+        boolean chk = true;
+        for(int i=0;i<timelogs.length;i++){
+            chk = true;
+            daynum = startday;
+            for(int j=0;j<7;j++,daynum++){
+                daynum = daynum>7?daynum%7:daynum;
+                time = (timelogs[i][j]/100*60)+(timelogs[i][j]%100);
+                if(time>schedules[i]&&daynum!=6&&daynum!=7){
+                    chk = false;
+                    break;
+                }
             }
+            if(chk)answer++;
         }
         
-        for(int i=0;i<schedules.length;i++){
-            boolean chk = true;
-            for(int j=0;j<5;j++){
-                int endmin = 0;
-                int endhor = 0;
-                if((schedules[i]%100+10)>=60){
-                    endhor = (schedules[i]/100+1);
-                    endmin = (schedules[i]%100+10)%60;
-                }else{
-                    endhor = schedules[i]/100;
-                    endmin = schedules[i]%100+10;
-                }
-                int endtime = endhor*100+endmin;
-                
-                if(sch[i][j]>endtime){
-                    chk = false;
-                }
-            }if(chk)answer++;
-        }
+        
+        
         return answer;
     }
 }
