@@ -8,7 +8,6 @@ class Solution {
         for(int[] p : puddles){
             map[p[1]][p[0]] = -1;
         }   
-        
         for(int r=0;r<=n;r++){
             map[r][0] = 0;
         }
