@@ -27,7 +27,6 @@ class Solution {
                     if(!visited[next_x][next_y]&&map[next_x][next_y]==1){
                         visited[next_x][next_y] = true;
                         count[next_x][next_y] = count[cur_x][cur_y]+1;
-                        // System.out.println(next_x+" , "+next_y+" ㅊㅓㄹㅣ   "+count[next_x][next_y]);
                         q.add(new int[]{next_x, next_y});
                     }
                 }
