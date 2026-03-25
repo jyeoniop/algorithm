@@ -9,7 +9,8 @@ class Solution {
         PriorityQueue<int[]> pq = new PriorityQueue<>((a,b)->{
             if(a[1]==b[1]) return a[0]-b[0];
             return a[1]-b[1];
-        });
+        }); 
+        
         
         int answer = 0;
 
@@ -30,6 +31,7 @@ class Solution {
                 count++;
             }
         }
+        
         answer /= jobs.length;
         
         
