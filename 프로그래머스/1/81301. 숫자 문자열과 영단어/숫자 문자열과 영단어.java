@@ -1,35 +1,46 @@
-import java.util.*;
 class Solution {
     public int solution(String s) {
-        StringBuilder sb= new StringBuilder();
-        Character[] str = new Character[s.length()];
-        for(int i=0;i<s.length();i++){
-            str[i] = s.charAt(i);
-        }
+        StringBuilder sb = new StringBuilder();
+        int answer = 0;
         for(int i=0;i<s.length();){
-            
-            if(Character.isDigit(str[i])){
-                sb.append(str[i]);
+            if(Character.isDigit(s.charAt(i))){
+                sb.append(s.charAt(i));
                 i++;
             }else{
-                // String word = s.charAt(i)+s.charAt(i+1)+s.charAt(i+2)+"";
-
-                if(str[i]=='z'){sb.append(0); i+=4;}
-                else if(str[i]=='o'){sb.append(1); i+=3;}
-                else if(str[i]=='t'&&str[i+1]=='w'){sb.append(2); i+=3;}
-                else if(str[i]=='t'&&str[i+1]=='h'){sb.append(3); i+=5;}
-                else if(str[i]=='f'&&str[i+1]=='o'){sb.append(4); i+=4;}
-                else if(str[i]=='f'&&str[i+1]=='i'){sb.append(5); i+=4;}
-                else if(str[i]=='s'&&str[i+1]=='i'){sb.append(6); i+=3;}
-                else if(str[i]=='s'&&str[i+1]=='e'){sb.append(7); i+=5;}
-                else if(str[i]=='e'){sb.append(8); i+=5;}
-                else {sb.append(9); i+=4;}
-                
-                
+                if(s.substring(i,i+3).equals("one")){
+                    sb.append(1);
+                    i+=3;
+                }else if(s.substring(i,i+3).equals("two")){
+                    sb.append(2);
+                    i+=3;
+                }else if(s.substring(i,i+3).equals("six")){
+                    sb.append(6);
+                    i+=3;
+                }else if(s.substring(i,i+3).equals("zer")){
+                    sb.append(0);
+                    i+=4;
+                }else if(s.substring(i,i+3).equals("fou")){
+                    sb.append(4);
+                    i+=4;
+                }else if(s.substring(i,i+3).equals("nin")){
+                    sb.append(9);
+                    i+=4;
+                }else if(s.substring(i,i+3).equals("fiv")){
+                    sb.append(5);
+                    i+=4;
+                }else if(s.substring(i,i+3).equals("sev")){
+                    sb.append(7);
+                    i+=5;
+                }else if(s.substring(i,i+3).equals("eig")){
+                    sb.append(8);
+                    i+=5;
+                }else if(s.substring(i,i+3).equals("thr")){
+                    sb.append(3);
+                    i+=5;
+                }
             }
         }
-
-        int answer = Integer.parseInt(sb.toString());
+        answer = Integer.parseInt(sb.toString());
         return answer;
     }
 }
