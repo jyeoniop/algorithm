@@ -2,21 +2,16 @@ import java.util.*;
 class Solution {
     public boolean solution(String[] phone_book) {
         boolean answer = true;
-        Set<String> hset = new HashSet<>();
-        for(String p:phone_book){
-            hset.add(p);
-        }
         
+        Set<String> tset = new TreeSet<>();
         for(String phone:phone_book){
-            for(int i=1;i<phone.length();i++){
-                if(hset.contains(phone.substring(0,i))){
-                    return false;
-                }
+            tset.add(phone);
+        }
+        for(int i=0;i<phone_book.length;i++){
+            for(int j=1;j<phone_book[i].length();j++){
+                if(tset.contains(phone_book[i].substring(0,j))) return false;
             }
         }
-        
-        
-        
         return answer;
     }
 }
