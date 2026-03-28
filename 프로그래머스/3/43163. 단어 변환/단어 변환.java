@@ -48,6 +48,7 @@ class Solution {
         }
         if(count==1)return true;
         else return false;
+        
     }
     public int solution(String begin, String target, String[] words) {
         this.begin = begin;
