@@ -11,7 +11,6 @@ class Solution {
         for(String str:completion){
             par.put(str, par.get(str)-1);
         }
-
         for(String k : par.keySet()){
             if(par.get(k)!=0){
                 answer= k;
