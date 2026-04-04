@@ -41,12 +41,7 @@ class Solution {
             int a = wires[i][0];
             int b = wires[i][1];
             minus = Math.abs(n-(bfs(a,b)*2));
-                min = Math.min(min, minus);   
-            // if(graph.get(a).size()>1&&graph.get(b).size()>1){
-                // System.out.println(bfs(a,b));
-                 
-            // }
-            
+            min = Math.min(min, minus);  
        
         }
         answer = min;
