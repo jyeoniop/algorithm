@@ -2,27 +2,15 @@ class Solution {
     public int[] solution(int brown, int yellow) {
         int[] answer = new int[2];
         
-        int oddchk = 0;
-        if(brown%2!=0){
-            oddchk = 1;
-            brown--;
-        }
+        int n = (brown-4)/2;
         
-        brown -=4;
-        int h = 1;
-        int w = brown/2-h;
-        while(w>=h){
-            if(h*w==(yellow+oddchk)){
-                answer[0] = w+2;
-                answer[1] = h+2;
-                break;
+        for(int i=1;i<=n/2;i++){
+            if(i*(n-i)==yellow){
+                answer[0] = (n-i)+2;
+                answer[1] = i+2;
+                return answer;
             }
-            h++;
-            w--;
-            
         }
-        
-        
         return answer;
     }
 }
