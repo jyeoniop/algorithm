@@ -23,7 +23,6 @@ class Solution {
                         visited[i] = true;
                         count[i] = index+1;
                     }
-
                 }
             }
         }
