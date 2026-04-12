@@ -17,8 +17,6 @@ class Solution {
                  q.add(a);
                 }
             }
-            
-            
         }
     }
     public int solution(int n, int[][] computers) {
