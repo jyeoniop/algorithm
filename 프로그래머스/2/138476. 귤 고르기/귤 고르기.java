@@ -11,6 +11,7 @@ class Solution {
                 .sorted(Comparator.reverseOrder())
                 .collect(Collectors.toList());
         
+        
         int answer = 0;
         int sum = 0;
         for (int count : sortedCounts) {
