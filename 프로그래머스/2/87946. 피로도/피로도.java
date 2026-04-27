@@ -1,33 +1,33 @@
-import java.util.*;
 class Solution {
-    static int max;
-    static boolean[] visited;
-    static int[][] dun;
-    public void dfs(int bal, int depth){
-
-        max = Math.max(max,depth);
-
-        
-        for(int i=0;i<dun.length;i++){
-            if(!visited[i]){
-                if(bal>=dun[i][0]){
-                    visited[i] = true;
-                    dfs(bal-dun[i][1], depth+1);
-                    visited[i] = false;
-
-                }
+    int size;
+    boolean[] visited;
+    int[][] dungeons;
+    int max;
+    public void dfs(int depth, int count, int k){
+        if(depth==size){
+            max = Math.max(max, count);
         }
-    }}
+        for(int i=0;i<size;i++){
+            if(!visited[i]){
+                visited[i] = true;
+                if(dungeons[i][0]<=k){
+                    dfs(depth+1, count+1, k-dungeons[i][1]);
+                }else{
+                    dfs(depth+1, count, k);
+                }
+                visited[i] = false;
+            }
+        }
+    }
     public int solution(int k, int[][] dungeons) {
         int answer = -1;
-        
-        visited = new boolean[dungeons.length];
-        dun = dungeons;
-        
+        size = dungeons.length;
+        visited = new boolean[size];
+        this.dungeons = dungeons;
         max = 0;
-        dfs(k, 0);
-        answer = max;
         
+        dfs(0,0,k);
+        answer = max;
         return answer;
     }
 }
