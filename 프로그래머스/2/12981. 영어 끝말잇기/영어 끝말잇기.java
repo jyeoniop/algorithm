@@ -8,7 +8,6 @@ class Solution {
         int index = 1;
         char pre = words[0].charAt(0);
         for(String word : words){
-
             if(index>n){
                 index =1;
                 count++;
