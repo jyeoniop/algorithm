@@ -14,6 +14,7 @@ class Solution {
             stk.push((number.charAt(index)-'0'));
             index++;
         }
+        
         while(k > 0) {
             stk.pop();
             k--;
