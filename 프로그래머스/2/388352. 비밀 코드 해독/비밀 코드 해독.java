@@ -8,7 +8,7 @@ class Solution {
         if(depth==5){
             if(chk(arr))result++;
             return;
-        }
+        } 
         for(int i=start;i<=n;i++){
             arr[depth] = i;
             dfs(i+1, depth+1, arr);
