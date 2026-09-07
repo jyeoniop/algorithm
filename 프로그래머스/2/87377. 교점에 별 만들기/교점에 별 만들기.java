@@ -6,7 +6,7 @@ class Solution {
         
         // 최소/최대 좌표를 저장할 변수 (초기값은 가장 극단적인 값으로 세팅)
         long minX = Long.MAX_VALUE;
-        long maxX = Long.MIN_VALUE;
+        long maxX = Long.MIN_VALUE; 
         long minY = Long.MAX_VALUE;
         long maxY = Long.MIN_VALUE;
         
